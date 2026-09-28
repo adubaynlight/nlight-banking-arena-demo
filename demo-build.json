@@ -1,0 +1,13 @@
+{
+  "base": "/nlight-banking-arena-demo/",
+  "builtAt": "2026-09-28T06:30:05.271Z",
+  "commit": "2987cc1",
+  "recordedAt": "2026-09-15T05:30:00.000Z",
+  "recordedCommit": "2987cc1",
+  "personas": [
+    "demo-cu.admin",
+    "demo-cu.compliance1",
+    "demo-cu.compliance2",
+    "demo-cu.auditor"
+  ]
+}
