@@ -1,0 +1,2 @@
+import{a as e,r as t}from"./fs-D7xUHpzc.js";import{d as n,f as r,g as i,p as a,x as o}from"./src-Ct8oO6r2.js";o();var s=class extends i{constructor(i){super(i),this.rootDir=r(i),t(n(this.rootDir))||e(this.rootDir)}async init(e,t){return this.pg=e,{emscriptenOpts:{...t,preRun:[...t.preRun||[],e=>{let t=e.FS.filesystems.NODEFS;e.FS.mkdir(a),e.FS.mount(t,{root:this.rootDir},a)}]}}}async closeFs(){this.pg.Module.FS.quit()}};export{s as NodeFS};
+//# sourceMappingURL=nodefs-BX4ijG_V.js.map

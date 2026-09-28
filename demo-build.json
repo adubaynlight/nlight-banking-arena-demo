@@ -1,13 +1,12 @@
 {
   "base": "/nlight-banking-arena-demo/",
-  "builtAt": "2026-09-28T06:30:05.271Z",
-  "commit": "2987cc1",
-  "recordedAt": "2026-09-15T05:30:00.000Z",
-  "recordedCommit": "2987cc1",
-  "personas": [
-    "demo-cu.admin",
-    "demo-cu.compliance1",
-    "demo-cu.compliance2",
-    "demo-cu.auditor"
-  ]
+  "backend": "live",
+  "builtAt": "2026-09-28T08:35:15.925Z",
+  "commit": "1c49e07",
+  "databaseName": "banking-arena-demo-v5-73cf3e10-ea7942",
+  "demoOnlyConstants": {
+    "note": "The cookie secret and field keys in this build were generated for it and are shipped in the page on purpose. They are not secrets: each visitor has an isolated database in their own browser, holding synthetic data only.",
+    "cookieSecretPrefix": "demo-only-cookie-secret-",
+    "fieldKeyId": "ea7942"
+  }
 }
