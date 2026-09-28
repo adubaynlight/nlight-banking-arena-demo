@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="NLight Banking Arena build tour: a CRM for smaller banks and lenders. Synthetic data only.">
+<title>Banking Arena Build Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root {
+  --ground: #f4f7f7;
+  --surface: #ffffff;
+  --sunken: #e9f0f1;
+  --ink: #0e2228;
+  --muted: #52666c;
+  --line: #d5e0e2;
+  --petrol: #0f3b46;
+  --teal: #0f8f82;
+  --teal-soft: #d7f2ee;
+  --amber: #8a5a00;
+  --amber-soft: #fff1d6;
+  --done: #147a5c;
+  --run: #0f8f82;
+  --shadow: 0 1px 2px rgba(15, 59, 70, .06), 0 8px 24px rgba(15, 59, 70, .08);
+  --display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0a1b20;
+    --surface: #0f262d;
+    --sunken: #13323a;
+    --ink: #e3eef0;
+    --muted: #9db3b8;
+    --line: #22434b;
+    --petrol: #9fd8d0;
+    --teal: #2dd4bf;
+    --teal-soft: #103d3a;
+    --amber: #f2c46b;
+    --amber-soft: #3a2c0c;
+    --done: #4ade9c;
+    --run: #2dd4bf;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0a1b20;
+  --surface: #0f262d;
+  --sunken: #13323a;
+  --ink: #e3eef0;
+  --muted: #9db3b8;
+  --line: #22434b;
+  --petrol: #9fd8d0;
+  --teal: #2dd4bf;
+  --teal-soft: #103d3a;
+  --amber: #f2c46b;
+  --amber-soft: #3a2c0c;
+  --done: #4ade9c;
+  --run: #2dd4bf;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.6 var(--body);
+  padding-inline: 20px;
+  padding-block: 0 64px;
+}
+.wrap { max-width: 1120px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -.01em; }
+p { margin: 0; }
+a { color: var(--teal); }
+.eyebrow { font: 600 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); font-size: .88em; }
+
+header.top { padding-block: 40px 28px; display: grid; gap: 14px; }
+.wordmark { font: 800 16px/1 var(--display); color: var(--petrol); letter-spacing: -.01em; }
+.wordmark span { font-weight: 600; }
+header.top h1 { font-size: clamp(30px, 4.6vw, 46px); line-height: 1.1; max-width: 22ch; }
+.lede { color: var(--muted); max-width: 66ch; font-size: 16px; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { font: 600 12px/1 var(--body); padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); }
+.badge.warn { background: var(--amber-soft); color: var(--amber); border-color: transparent; }
+
+section { padding-block: 28px; display: grid; gap: 18px; }
+section > h2 { font-size: 22px; }
+.sub { color: var(--muted); max-width: 70ch; }
+
+/* Checkpoint track */
+.track { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; list-style: none; margin: 0; padding: 0; }
+.cp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+.cp .id { font: 500 12px/1 var(--mono); color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cp .name { font-weight: 600; font-size: 14px; line-height: 1.35; }
+.cp .state { font: 600 11px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; }
+.cp.done { border-color: color-mix(in srgb, var(--done) 45%, var(--line)); }
+.cp.done .state { color: var(--done); }
+.cp.run { border-color: var(--run); box-shadow: 0 0 0 3px var(--teal-soft); }
+.cp.run .state { color: var(--run); }
+.cp.todo .state { color: var(--muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; display: inline-block; }
+.cp.run .dot { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .cp.run .dot { animation: none; } }
+
+/* Verification figures */
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.fig { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 2px; }
+.fig b { font: 700 28px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.fig span { color: var(--muted); font-size: 13px; }
+
+/* Theme switch for screenshots */
+.bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px; }
+.seg { display: inline-flex; background: var(--sunken); border-radius: 10px; padding: 3px; gap: 2px; }
+.seg button { font: 600 13px/1 var(--body); border: 0; background: transparent; color: var(--muted); padding: 9px 14px; border-radius: 8px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+.seg button:focus-visible, .chips a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips a { font: 500 13px/1 var(--body); text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 8px 11px; border-radius: 999px; }
+.chips a:hover { border-color: var(--teal); }
+
+/* Screens */
+.screens { display: grid; gap: 40px; }
+.screen { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; scroll-margin-top: 16px; }
+.screen .head { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }
+.screen h3 { font-size: 19px; }
+.screen .area { font: 600 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+.screen p { color: var(--muted); max-width: 72ch; }
+.shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--sunken); aspect-ratio: 1440 / 900; max-width: 100%; }
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.phones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.phone { display: grid; gap: 8px; }
+.phone .frame { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); aspect-ratio: 390 / 844; max-width: 100%; background: var(--sunken); }
+.phone img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.phone span { font-size: 13px; color: var(--muted); text-align: center; }
+@media (max-width: 560px) { .phones { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Next */
+.next { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 16px; }
+.card p, .card li { color: var(--muted); font-size: 14px; }
+.card ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.card.ask { border-color: var(--teal); background: color-mix(in srgb, var(--teal-soft) 55%, var(--surface)); }
+.sme { background: var(--amber-soft); color: var(--amber); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+footer { color: var(--muted); font-size: 13px; padding-block: 24px 0; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="wordmark">NLight <span>Banking Arena</span></div>
+    <h1>What the build looks like so far</h1>
+    <p class="lede">A CRM for smaller banks and lenders, India NBFCs and HFCs first, then US credit unions and community banks. Three of ten build checkpoints are finished and tagged, and the customer core is being built now. Every screen below comes from the real product, running on synthetic data.</p>
+    <div class="badges">
+      <span class="badge">Updated 28 Sep 2026</span>
+      <span class="badge">Latest tag <span class="mono">phase-2a</span></span>
+      <span class="badge warn">Synthetic data only</span>
+      <span class="badge warn">Rule templates: REQUIRES SME REVIEW</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="progress">
+    <h2 id="progress">Build progress</h2>
+    <p class="sub">The approved v0.2 plan runs in ten checkpoints. Each one is built, reviewed, tested and tagged before the next one starts.</p>
+    <ol class="track">
+      <li class="cp done"><span class="id">1A <span class="dot"></span></span><span class="name">Test and security groundwork</span><span class="state">Done</span></li>
+      <li class="cp done"><span class="id">1B <span class="dot"></span></span><span class="name">Design system, shell, admin screens</span><span class="state">Done</span></li>
+      <li class="cp done"><span class="id">2A <span class="dot"></span></span><span class="name">Approvals, notifications, export, calendars</span><span class="state">Done</span></li>
+      <li class="cp run"><span class="id">2B <span class="dot"></span></span><span class="name">Customers, households, consent, tasks</span><span class="state">Building</span></li>
+      <li class="cp todo"><span class="id">3A <span class="dot"></span></span><span class="name">KYC, documents, calendar</span><span class="state">Next</span></li>
+      <li class="cp todo"><span class="id">3B <span class="dot"></span></span><span class="name">Leads, routing, partners, imports</span><span class="state">Planned</span></li>
+      <li class="cp todo"><span class="id">4A <span class="dot"></span></span><span class="name">Loan application pipeline</span><span class="state">Planned</span></li>
+      <li class="cp todo"><span class="id">4B <span class="dot"></span></span><span class="name">Loan book, accounts, complaints</span><span class="state">Planned</span></li>
+      <li class="cp todo"><span class="id">5A <span class="dot"></span></span><span class="name">Collections and contact rules</span><span class="state">Planned</span></li>
+      <li class="cp todo"><span class="id">5B <span class="dot"></span></span><span class="name">Dashboards, reports, demo pack</span><span class="state">Planned</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="checks">
+    <h2 id="checks">Last release gate (checkpoint 2A)</h2>
+    <div class="figures">
+      <div class="fig"><b>671</b><span>unit and API tests passing</span></div>
+      <div class="fig"><b>117</b><span>browser tests passing, 0 flaky</span></div>
+      <div class="fig"><b>0</b><span>serious accessibility issues, light and dark</span></div>
+      <div class="fig"><b>226 KB</b><span>first page load (gzip), budget 230 KB</span></div>
+    </div>
+    <p class="sub">Each institution's data is kept apart inside the database itself, and an automated suite checks that for every table. Five tests that need a full PostgreSQL server are skipped on this machine and will run in CI.</p>
+  </section>
+
+  <section aria-labelledby="screens-h">
+    <div class="bar">
+      <div style="display:grid;gap:6px">
+        <h2 id="screens-h">Screens</h2>
+        <p class="sub">Desktop at 1440 px. Switch to see every screen in the dark theme.</p>
+      </div>
+      <div class="seg" role="group" aria-label="Screenshot theme">
+        <button type="button" id="theme-light" aria-pressed="true" data-shot="light">Light</button>
+        <button type="button" id="theme-dark" aria-pressed="false" data-shot="dark">Dark</button>
+      </div>
+    </div>
+    <nav class="chips" aria-label="Jump to a screen" id="chips"></nav>
+    <div class="screens" id="screens"></div>
+  </section>
+
+  <section aria-labelledby="mobile-h">
+    <h2 id="mobile-h">On a phone</h2>
+    <p class="sub">Below 1024 px the sidebar becomes a slide-out menu, and pages keep a 16 px gutter with no sideways page scroll.</p>
+    <div class="phones">
+      <figure class="phone" style="margin:0"><div class="frame"><img src="shots/home-390-light.png" alt="Home on a phone, light theme" loading="lazy"></div><span>Home · light</span></figure>
+      <figure class="phone" style="margin:0"><div class="frame"><img src="shots/users-390-dark.png" alt="Users list on a phone, dark theme" loading="lazy"></div><span>Users · dark</span></figure>
+      <figure class="phone" style="margin:0"><div class="frame"><img src="shots/rules-390-light.png" alt="Rule templates on a phone, light theme" loading="lazy"></div><span>Rule templates · light</span></figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="next-h">
+    <h2 id="next-h">What's next</h2>
+    <div class="next">
+      <div class="card">
+        <h3>Being built now: customer core (2B)</h3>
+        <ul>
+          <li>Individual, business, trust and HUF customers</li>
+          <li>PAN, GSTIN, SSN and EIN encrypted and masked, with reveal-with-reason</li>
+          <li>Households and relationships, consent by purpose and channel</li>
+          <li>Activities, tasks, and notes with @mentions</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Coming after that</h3>
+        <p>KYC and documents, leads and routing, the loan application pipeline, loan accounts and complaints, collections with contact rules, and role dashboards with reports.</p>
+      </div>
+      <div class="card ask">
+        <h3>Interactive demo</h3>
+        <p>A clickable, read-only version of the product on synthetic data is being prepared and will replace this page. It is updated after every build checkpoint.</p>
+      </div>
+    </div>
+    <p class="sme"><strong>REQUIRES SME REVIEW.</strong> The rule templates shown in these screens (RBI KYC, RB-IOS complaints, digital lending, recovery conduct, CFPB, Reg B, TCPA/Reg F) are starting points taken from cited sources. No regulatory figure takes effect until an institution's compliance officers sign it off. Not legal advice.</p>
+  </section>
+
+  <footer>NLight Banking Arena v0.2 build. All institutions, people and figures shown are synthetic.</footer>
+</div>
+
+<script>
+(function () {
+  var SCREENS = [
+    { id: 'sign-in', area: 'Access', title: 'Sign-in', text: 'Each institution signs in through its own identity provider. The page states plainly that the data is synthetic.' },
+    { id: 'home', area: 'Home', title: 'Home', text: 'Headline figures for the signed-in role: users, branches, rule proposals waiting and the audit-chain status, each linking to the page behind it.' },
+    { id: 'approvals', area: 'Work', title: 'Approvals inbox', text: 'Every change that needs a second person lands here. Nobody can decide their own request, and each request shows its SLA clock.' },
+    { id: 'approval-drawer', area: 'Work', title: 'Approval decision', text: 'A before and after comparison of exactly what changes, with a required note. The decision is recorded in the audit log.' },
+    { id: 'notifications', area: 'Work', title: 'Notifications', text: 'A notification centre with For me and All views. Each person can mute notification kinds that are not mandatory.' },
+    { id: 'users', area: 'Admin', title: 'Users and roles', text: 'A server-paged table with filters, sorting, saved views, column controls and bulk actions that need a reason.' },
+    { id: 'user-record', area: 'Admin', title: 'User record', text: 'Roles scoped to a branch subtree, active sessions, reporting line and history. People cannot change their own roles.' },
+    { id: 'branches', area: 'Admin', title: 'Branches', text: 'Head office, zones, regions and branches shown as a tree beside the table.' },
+    { id: 'teams', area: 'Admin', title: 'Teams', text: 'Teams with a lead and members, feeding the reporting lines used for task and approval routing.' },
+    { id: 'calendars', area: 'Admin', title: 'Business calendars', text: 'Working hours and holidays per institution or branch. Internal SLA clocks count business time; regulator clocks always count calendar days.' },
+    { id: 'rules', area: 'Compliance', title: 'Rule templates', text: 'India or US templates with their sources and verification status. Nothing is in force until a second compliance officer approves it.' },
+    { id: 'rule-detail', area: 'Compliance', title: 'Rule template detail', text: 'Version timeline, sources and the propose drawer. The officer writes their own reason for every change.' },
+    { id: 'audit', area: 'Compliance', title: 'Audit log', text: 'An append-only, hash-chained log with old and new values and masked identifiers. The chain can be verified from the page, and the result is exportable.' },
+    { id: 'jobs', area: 'Operations', title: 'Background jobs', text: 'Scheduled and queued work, such as clock sweeps and exports, with retries and a run history.' },
+    { id: 'search', area: 'Everywhere', title: 'Search', text: 'Grouped, server-paged results. Identifier text is never placed in a URL or a log. Ctrl+K opens the same search from any page.' }
+  ];
+  var mode = 'light';
+  try { mode = localStorage.getItem('tour-shot-theme') || 'light'; } catch (e) {}
+  if (mode !== 'dark') mode = 'light';
+
+  var chips = document.getElementById('chips');
+  var list = document.getElementById('screens');
+  SCREENS.forEach(function (s) {
+    var a = document.createElement('a');
+    a.href = '#' + s.id; a.textContent = s.title;
+    chips.appendChild(a);
+
+    var art = document.createElement('article');
+    art.className = 'screen'; art.id = s.id;
+    art.innerHTML =
+      '<div class="head"><span class="area"></span><h3></h3></div>' +
+      '<p></p>' +
+      '<div class="shot"><img loading="lazy" alt=""></div>';
+    art.querySelector('.area').textContent = s.area;
+    art.querySelector('h3').textContent = s.title;
+    art.querySelector('p').textContent = s.text;
+    var img = art.querySelector('img');
+    img.alt = s.title + ' screen';
+    img.dataset.id = s.id;
+    list.appendChild(art);
+  });
+
+  var buttons = document.querySelectorAll('.seg button');
+  function apply(m) {
+    mode = m;
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.shot === m)); });
+    document.querySelectorAll('.shot img').forEach(function (img) {
+      img.src = 'shots/' + img.dataset.id + '-1440-' + m + '.png';
+      img.alt = img.alt.replace(/ \((light|dark) theme\)$/, '') + ' (' + m + ' theme)';
+    });
+    try { localStorage.setItem('tour-shot-theme', m); } catch (e) {}
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.shot); }); });
+  apply(mode);
+})();
+</script>
+</body>
+</html>
