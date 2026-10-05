@@ -1,2 +1,0 @@
-import{n as e}from"./rolldown-runtime-C0FnF6B9.js";function t(e){throw new r(e)}var n,r,i=e((()=>{n=`is not available in the public demo`,r=class extends Error{name=`DemoUnavailableError`;code=`ERR_DEMO_UNAVAILABLE`;constructor(e){super(`${e} ${n}`)}}}));export{i as n,t as r,r as t};
-//# sourceMappingURL=unavailable-BcoYWmrS.js.map
