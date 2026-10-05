@@ -1,2 +1,0 @@
-import{Gr as e,Xt as t}from"./index-C5MAOD7k.js";var n=n=>e({queryKey:[...n,`portal`,`applications`,`list`],queryFn:()=>t.get(`/api/portal/applications`)}),r=(n,r)=>e({queryKey:[...n,`portal`,`applications`,`detail`,r],queryFn:()=>t.get(`/api/portal/applications/${encodeURIComponent(r)}`)});export{n,r as t};
-//# sourceMappingURL=portal-queries-CIh1T60U.js.map
