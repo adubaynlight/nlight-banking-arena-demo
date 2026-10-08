@@ -1,2 +1,0 @@
-import{cn as e,gi as t}from"./index-C3FBjru3.js";var n=n=>t({queryKey:[...n,`portal`,`applications`,`list`],queryFn:()=>e.get(`/api/portal/applications`)}),r=(n,r)=>t({queryKey:[...n,`portal`,`applications`,`detail`,r],queryFn:()=>e.get(`/api/portal/applications/${encodeURIComponent(r)}`)});export{n,r as t};
-//# sourceMappingURL=portal-queries-Btt2vTsX.js.map

@@ -1,0 +1,2 @@
+import{Si as e,un as t}from"./index-Cj0jwiBO.js";var n=n=>e({queryKey:[...n,`portal`,`applications`,`list`],queryFn:()=>t.get(`/api/portal/applications`)}),r=(n,r)=>e({queryKey:[...n,`portal`,`applications`,`detail`,r],queryFn:()=>t.get(`/api/portal/applications/${encodeURIComponent(r)}`)});export{n,r as t};
+//# sourceMappingURL=portal-queries-e4JPjuZK.js.map
